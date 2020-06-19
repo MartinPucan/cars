@@ -23,11 +23,6 @@ class Car
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $brand;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $price;
@@ -47,6 +42,12 @@ class Car
      */
     private $fuelType;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="car")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $brand;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,18 +61,6 @@ class Car
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getBrand(): ?string
-    {
-        return $this->brand;
-    }
-
-    public function setBrand(string $brand): self
-    {
-        $this->brand = $brand;
 
         return $this;
     }
@@ -120,6 +109,18 @@ class Car
     public function setFuelType(string $fuelType): self
     {
         $this->fuelType = $fuelType;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

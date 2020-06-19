@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Cars{% endblock %}
 
 {% block body %}
 
@@ -15,67 +15,78 @@
                             <h6 class="title">Brands</h6>
                         </header>
 
-                        <div class="card">
-                            {% for car in cars %}
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{{ car.brand }}</li>
-                                </ul>
-                            {% endfor %}
+                        <div class="m-1 text-center">
+                            <label>
+                                <select class="custom-select">
+                                    <option selected>Choose brand</option>
+                                    {% for brand in brands %}
+                                            <option value="{{ brand.id }}">{{ brand.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
                         </div>
                     </section>
 
-                        <article class="card-group-item">
-                            <header class="card-header">
-                                <h6 class="title">Choose type</h6>
-                            </header>
-                            <div class="filter-content">
-                                <div class="card-body">
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadio" value="">
-                                        <span class="form-check-label">First hand items</span>
-                                    </label>
-                                </div>
+                    <section class="card-group-item">
+                        <header class="card-header">
+                            <h6 class="title">Choose type</h6>
+                        </header>
+                            <div class="card-body">
+                                <label class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                                    <span class="form-check-label">First hand items</span>
+                                </label>
                             </div>
-                        </article>
-                        <button class="btn bg-secondary m-2 text-white">Filter</button>
-                    </div> <!-- card.// -->
+                    </section>
+                    <button class="btn bg-secondary m-2 text-white">Filter</button>
+                </div>
+        <div class="text-center m-2">
+            <button class="btn btn-info">Create</button>
+        </div>
         </div>
 
         <div class="media-body">
-            <div class="nav nav-pills flex-column flex-sm-row mb-2 bg-light rounded">
-                <a class="flex-sm-fill text-sm-center nav-link active" href="#">Podle abecedy</a>
-                <a class="flex-sm-fill text-sm-center nav-link" href="#">Nejlevnejsi</a>
-                <a class="flex-sm-fill text-sm-center nav-link" href="#">Nejdrazsi</a>
+            <div class="row border bg-light rounded m-1 mb-2 p-2 text-center">
+                <div class="col">Podle abecedy</div>
+                <div class="col">Nejlevnejsi</div>
+                <div class="col">Nejdrazsi</div>
             </div>
-            <table class="table table-hover bg-light">
+            <table class="table table-hover bg-light rounded w-100">
                 <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Kilometers</th>
-                    <th>Registration</th>
-                    <th>Fuel Type</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Kilometers</th>
+                        <th>Registration</th>
+                        <th>Fuel Type</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
+
                 <tbody>
-                {% for car in cars %}
-                <tr>
-                    <th scope="row">
-                        {{ car.id }}
-                    </th>
-                    <td>{{ car.name }}</td>
-                    <td>{{ car.brand }}</td>
-                    <td>{{ car.price }} Kc</td>
-                    <td>{{ car.kilometer }} Km</td>
-                    <td>{{ car.registration }}</td>
-                    <td>{{ car.fuelType }}</td>
-                    // TODO
-                    <td>Delete Edit</td>
-                </tr>
-                {% endfor %}
+                    {% for car in cars %}
+                        <tr>
+                            <th scope="row">
+                                {{ car.id }}
+                            </th>
+                            <td><a class="fs-md td_none" href="{{ path('detail', {'id': car.id}) }}"> {{ car.name }}</a></td>
+                            <td>{{ car.brand.name }}</td>
+                            <td>{{ car.price }} Kc</td>
+                            <td>{{ car.kilometer }} Km</td>
+                            <td>{{ car.registration }}</td>
+                            <td>{{ car.fuelType }}</td>
+                            <td>
+                                <span>
+                                    <a href="#edit" class="btn bg-primary">Edit</a>
+                                </span>
+                                <span>
+                                    <a href="#delete" class="btn bg-danger">Delete</a>
+                                </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
