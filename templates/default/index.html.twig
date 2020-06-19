@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+
+<div class="container p-1">
+    <h1 class="text-center">Cars</h1>
+    <div class="media d-flex">
+        <div class="border rounded bg-light mr-2 p-2">
+            <h3 class="text-center">Filter</h3>
+                    <div class="card">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <h6 class="title">Brands</h6>
+                            </header>
+                            <div class="card">
+                                {% for car in cars %}
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">{{ car.brand }}</li>
+                                    </ul>
+                                {% endfor %}
+                            </div>
+                        </article>
+
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <h6 class="title">Choose type</h6>
+                            </header>
+                            <div class="filter-content">
+                                <div class="card-body">
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="radio" name="exampleRadio" value="">
+                                        <span class="form-check-label">First hand items</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </article>
+                        <button class="btn bg-secondary m-2 text-white">Filter</button>
+                    </div> <!-- card.// -->
+        </div>
+
+        <div class="media-body">
+            <nav class="nav nav-pills flex-column flex-sm-row mb-2 bg-light rounded">
+                <a class="flex-sm-fill text-sm-center nav-link active" href="#">Podle abecedy</a>
+                <a class="flex-sm-fill text-sm-center nav-link" href="#">Nejlevnejsi</a>
+                <a class="flex-sm-fill text-sm-center nav-link" href="#">Nejdrazsi</a>
+            </nav>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Kilometers</th>
+                    <th>Registration</th>
+                    <th>Fuel Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for car in cars %}
+                <tr>
+                    <th scope="row">{{ car.id }}</th>
+                    <td>{{ car.name }}</td>
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.price }} Kc</td>
+                    <td>{{ car.kilometer }} Km</td>
+                    <td>{{ car.registration }}</td>
+                    <td>{{ car.fuelType }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
