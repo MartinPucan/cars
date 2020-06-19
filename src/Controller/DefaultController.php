@@ -29,4 +29,13 @@ class DefaultController extends AbstractController
             'cars' => $cars,
         ]);
     }
+
+    /**
+     * @Route("/{id}", name="detail")
+     */
+    public function detail()
+    {
+        return $this->render('default/detail.html.twig', [
+        ]);
+    }
 }
