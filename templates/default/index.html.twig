@@ -4,58 +4,61 @@
 
 {% block body %}
 
-<div class="container p-1">
-    <div>
-        <h1 class="text-center">Cars</h1>
+<div class="container">
+    <div class="tc mb-3">
+        <h1>Cars</h1>
     </div>
     <div class="d-flex">
-        <div class="mr-2 p-2">
-            <div class="card bg-light">
-                <h4 class="card-header bg-secondary text-white text-center">
-                    Filter
-                </h4>
+        <div class="mr-2">
+            <div class="card">
+                <div class="card-header bg-secondary text-white tc">
+                    <h4>Filter</h4>
+                </div>
                     <div class="card-group-item">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-light">
                                 <h6>Brands</h6>
                             </li>
                             <li class="list-group-item">
-                                <div class="text-center">
+                                <div class="tc">
                                     <select class="custom-select">
                                         <option selected>Choose brand</option>
-                                        {% for brand in brands %}
+                                            {% for brand in brands %}
                                                 <option value="{{ brand.id }}">{{ brand.name }}</option>
-                                        {% endfor %}
+                                            {% endfor %}
                                     </select>
                                 </div>
                             </li>
                             <li class="list-group-item bg-light">
                                 <h6>Price</h6>
                             </li>
-
                             <li class="list-group-item">
+                                <div class="d-flex mb-1">
+                                    <div class="mr-auto">Min</div>
+                                    <div class="ml-auto">Max</div>
+                                </div>
                                 <input type="range" class="form-control-range">
                             </li>
                         </ul>
                     </div>
-
-                    <div class="card-footer text-center">
-                        <button class="btn btn-outline-warning bg-secondary m-2">Search</button>
-                    </div>
+                <div class="card-footer tc">
+                    <button class="btn btn-outline-warning bg-secondary">Search</button>
                 </div>
+            </div>
 
-            <div class="text-center m-2">
-                <button class="btn btn-info">Create</button>
+            <div class="tc m-2">
+                <button class="btn btn-info">Create new record</button>
             </div>
         </div>
 
-        <div class="text-center">
-            <div class="row border bg-light rounded m-0 mb-2 p-2">
-                <div class="col">Podle abecedy</div>
+        <div class="">
+            <div class="row border bg-light rounded-1 m-0 mb-2 p-2 tc">
                 <div class="col">Nejlevnejsi</div>
                 <div class="col">Nejdrazsi</div>
+                <div class="col">Nejnovejsi</div>
+                <div class="col">Min Km</div>
             </div>
-            <table class="table table-hover bg-light rounded">
+            <table class="table table-hover bg-white rounded">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
@@ -72,22 +75,18 @@
                 <tbody>
                     {% for car in cars %}
                         <tr>
-                            <th scope="row">
-                                {{ car.id }}
-                            </th>
-                            <td><a class="fs-md td_none" href="{{ path('detail', {'id': car.id}) }}"> {{ car.name }}</a></td>
+                            <th scope="row">{{ car.id }}</th>
+                            <td>
+                                <a class="fs-md td_none" href="{{ path('detail', {'id': car.id}) }}">{{ car.name }}</a>
+                            </td>
                             <td>{{ car.brand.name }}</td>
                             <td>{{ car.price }} Kc</td>
                             <td>{{ car.kilometer }} Km</td>
                             <td>{{ car.registration }}</td>
                             <td>{{ car.fuelType }}</td>
                             <td>
-                                <span>
-                                    <a href="#edit" class="btn bg-primary">Edit</a>
-                                </span>
-                                <span>
-                                    <a href="#delete" class="btn bg-danger">Delete</a>
-                                </span>
+                                <a href="#edit" class="btn bg-primary text-white">Edit</a>
+                                <a href="#delete" class="btn bg-danger text-white">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}
