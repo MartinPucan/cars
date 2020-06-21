@@ -19,6 +19,22 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
+    public function findRandCars()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+
+        $sql = 'SELECT * FROM cars ORDER BY RAND() LIMIT 10';
+//        $stmt = $conn->prepare($sql);
+//        dd($stmt);
+    }
+
+    public function deleteRow()
+    {
+        $sql = 'DELETE FROM products WHERE product_id=$id';
+    }
+
+
     // /**
     //  * @return Car[] Returns an array of Car objects
     //  */
